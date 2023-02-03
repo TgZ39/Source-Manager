@@ -58,10 +58,14 @@ _GUICtrlEdit_SetCueBanner($input_date, "Datum", True)
 Global $input_index = GUICtrlCreateInput("", $ui_margin, 21 + 7 * $ui_margin + 6 * $input_height, $input_width, $input_height)
 _GUICtrlEdit_SetCueBanner($input_index, "Index", True)
 ; Buttons
+; Ok button
 Global $button_ok = GUICtrlCreateButton("OK", $ui_margin, $ui_height - $button_height - $ui_margin, $button_width, $button_height)
+; Clear inputfields button
 Global $button_clear = GUICtrlCreateButton("Löschen", 2 * $ui_margin + $button_width, $ui_height - $button_height - $ui_margin, $button_width, $button_height)
-Global $checkbox_keepdate = GUICtrlCreateCheckbox("Datum beibehalten?", 3 * $ui_margin + $input_width + $button_width + 20, 21 + 6 * $ui_margin + 5 * $input_height) ; Checkbox to keep date when $button_clear
-Global $button_currentdate = GUICtrlCreateButton("Aktuelles Datum", 2 * $ui_margin + $input_width, 21 + 6 * $ui_margin + 5 * $input_height, $button_width + 20, $button_height) ; Checkbox to keep date when $button_clear
+; Checkbox do determain if date input field should be cleared when clear button is pressed
+Global $checkbox_keepdate = GUICtrlCreateCheckbox("Datum beibehalten?", 3 * $ui_margin + $input_width + $button_width + 20, 21 + 6 * $ui_margin + 5 * $input_height)
+; Button to fill in current date
+Global $button_currentdate = GUICtrlCreateButton("Aktuelles Datum", 2 * $ui_margin + $input_width, 21 + 6 * $ui_margin + 5 * $input_height, $button_width + 20, $button_height)
 
 ; =============================================================Settings Tab=============================================================
 ; Tab Settings
