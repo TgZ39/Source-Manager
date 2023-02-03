@@ -16,8 +16,6 @@
 
 Opt("WinTitleMatchMode", 2)
 
-;~ Global $current_date = @MDAY & ". " & @MON & ". " & @YEAR ; Get Current Date
-
 ; =============================================================Settings=============================================================
 
 Global Const $ui_width = 600, $ui_height = 400, $ui_margin = 5
@@ -62,7 +60,8 @@ _GUICtrlEdit_SetCueBanner($input_index, "Index", True)
 ; Buttons
 Global $button_ok = GUICtrlCreateButton("OK", $ui_margin, $ui_height - $button_height - $ui_margin, $button_width, $button_height)
 Global $button_clear = GUICtrlCreateButton("Löschen", 2 * $ui_margin + $button_width, $ui_height - $button_height - $ui_margin, $button_width, $button_height)
-Global $checkbox_keepdate = GUICtrlCreateCheckbox("Datum beibehalten?", 2 * $ui_margin + $input_width + 5, 21 + 6 * $ui_margin + 5 * $input_height) ; Checkbox to keep date when $button_clear
+Global $checkbox_keepdate = GUICtrlCreateCheckbox("Datum beibehalten?", 3 * $ui_margin + $input_width + $button_width+20, 21 + 6 * $ui_margin + 5 * $input_height) ; Checkbox to keep date when $button_clear
+Global $button_currentdate = GUICtrlCreateButton("Aktuelles Datum", 2 * $ui_margin + $input_width, 21 + 6 * $ui_margin + 5 * $input_height, $button_width+20, $button_height) ; Checkbox to keep date when $button_clear
 
 ; =============================================================Settings Tab=============================================================
 ; Tab Settings
@@ -96,6 +95,8 @@ While True
 		Case $button_save
 			Read_Inputs()
 			Save_Config()
+		Case $button_currentdate
+			GUICtrlSetData($input_date, @MDAY & ". " & @MON & ". " & @YEAR)
 	EndSwitch
 WEnd
 
