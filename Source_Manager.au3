@@ -151,3 +151,5 @@ Func Modify_Url($url) ; Modifies the $url so "#" can be Send()
 	Local $url2 = StringReplace($url, "#", "{#}")
 	Return $url2
 EndFunc   ;==>Modify_Url
+
+# TODO: idk v1.2 ig
