@@ -123,8 +123,8 @@ Func Save_Config() ; Saves Settings to INI File
 EndFunc   ;==>Save_Config
 
 Func Load_Config() ; Load Settings from INI File
-	GUICtrlSetData($input_windowname, IniRead($iniconfig, "settings", "windowname", ""))
-	GUICtrlSetState($checkbox_keepdate, IniRead($iniconfig, "settings", "keepdate", ""))
+	GUICtrlSetData($input_windowname, IniRead($iniconfig, "settings", "windowname", "")) ; Save Windowname
+	GUICtrlSetState($checkbox_keepdate, IniRead($iniconfig, "settings", "keepdate", "")) ; Save if the Date should be keept when pressing clear
 EndFunc   ;==>Load_Config
 
 Func Input_Data() ; Inputs correctly formated Data
