@@ -13,6 +13,7 @@
 #include <GUIEdit.au3>
 #include <MsgBoxConstants.au3>
 #include <GuiListView.au3>
+#include <UpDownConstants.au3>
 
 Opt("WinTitleMatchMode", 2)
 
@@ -57,6 +58,7 @@ _GUICtrlEdit_SetCueBanner($input_date, "Datum", True)
 ; Input Index
 Global $input_index = GUICtrlCreateInput("", $ui_margin, 21 + 7 * $ui_margin + 6 * $input_height, $input_width, $input_height)
 _GUICtrlEdit_SetCueBanner($input_index, "Index", True)
+GUICtrlCreateUpdown($input_index)
 ; Buttons
 ; Ok button
 Global $button_ok = GUICtrlCreateButton("OK", $ui_margin, $ui_height - $button_height - $ui_margin, $button_width, $button_height)
