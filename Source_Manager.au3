@@ -57,7 +57,7 @@ Global $input_date = GUICtrlCreateInput("", $ui_margin, 21 + 6 * $ui_margin + 5 
 _GUICtrlEdit_SetCueBanner($input_date, "Datum", True)
 ; Input Index
 Global $input_index = GUICtrlCreateInput("", $ui_margin, 21 + 7 * $ui_margin + 6 * $input_height, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_index, "Index", True)
+_GUICtrlEdit_SetCueBanner($input_index, "Index (leer lassen für Prefix)", True)
 GUICtrlCreateUpdown($input_index)
 ; Buttons
 ; Ok button
@@ -78,8 +78,8 @@ Global $button_save = GUICtrlCreateButton("Speichern", $ui_margin, $ui_height - 
 ; Input Window to Activate
 Global $input_windowname = GUICtrlCreateInput("", $ui_margin, 21 + $ui_margin, $input_width, $input_height)
 _GUICtrlEdit_SetCueBanner($input_windowname, "Fenstername", True)
-Global $input_windowname = GUICtrlCreateInput("", $ui_margin, 21 + $ui_margin, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_windowname, "Präfix", True)
+Global $input_prefix = GUICtrlCreateInput("", $ui_margin, 21 + 2 * $ui_margin + $input_height, $input_width, $input_height)
+_GUICtrlEdit_SetCueBanner($input_prefix, "Präfix ohne Leerzeichen", True)
 
 Load_Config()
 GUISetState(@SW_SHOW)
@@ -121,17 +121,20 @@ Func Read_Inputs() ; Save Inputfields
 	Global $date = GUICtrlRead($input_date)
 	Global $index = GUICtrlRead($input_index)
 	Global $windowname = GUICtrlRead($input_windowname)
+	Global $prefix = GUICtrlRead($input_prefix)
 	Global $keepdate = GUICtrlRead($checkbox_keepdate)
 EndFunc   ;==>Read_Inputs
 
 Func Save_Config() ; Saves Settings to INI File
 	IniWrite($iniconfig, "settings", "windowname", $windowname)
+	IniWrite($iniconfig, "settings", "prefix", $prefix)
 	IniWrite($iniconfig, "settings", "keepdate", GUICtrlRead($checkbox_keepdate))
 	IniWrite($iniconfig, "settings", "keepindex", GUICtrlRead($checkbox_keepindex))
 EndFunc   ;==>Save_Config
 
 Func Load_Config() ; Load Settings from INI File
 	GUICtrlSetData($input_windowname, IniRead($iniconfig, "settings", "windowname", "")) ; Save Windowname
+	GUICtrlSetData($input_prefix, IniRead($iniconfig, "settings", "prefix", ""))
 	GUICtrlSetState($checkbox_keepdate, IniRead($iniconfig, "settings", "keepdate", "")) ; Save if the Date should be keept when pressing clear
 	GUICtrlSetState($checkbox_keepindex, IniRead($iniconfig, "settings", "keepindex", "")) ; Save if the Index should be keept when pressing clear
 EndFunc   ;==>Load_Config
@@ -141,7 +144,7 @@ Func Input_Data() ; Inputs correctly formated Data
 		WinActivate($windowname)
 
 		If $index <> "" Then Send("[" & $index & "] ")
-		If $index = "" Then Send("- ")
+		If $index = "" Then Send($prefix & " ")
 
 		If $lastname <> "" Then Send($lastname & ", ")
 
@@ -160,5 +163,3 @@ Func Modify_Url($url) ; Modifies the $url so "#" can be Send()
 	Local $url2 = StringReplace($url, "#", "{#}")
 	Return $url2
 EndFunc   ;==>Modify_Url
-
-# TODO: idk v1.2 ig
