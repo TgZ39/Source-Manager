@@ -2,7 +2,7 @@
 #include <GUIConstantsEx.au3>
 ; *** End added by AutoIt3Wrapper ***
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
-#AutoIt3Wrapper_Icon=logo.ico
+#AutoIt3Wrapper_Icon=icon.ico
 #AutoIt3Wrapper_Outfile=build\Source_Manager_x86.Exe
 #AutoIt3Wrapper_Outfile_x64=build\Source_Manager_x64.Exe
 #AutoIt3Wrapper_Compile_Both=y
