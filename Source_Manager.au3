@@ -78,8 +78,12 @@ Global $button_save = GUICtrlCreateButton("Speichern", $ui_margin, $ui_height - 
 ; Input Window to Activate
 Global $input_windowname = GUICtrlCreateInput("", $ui_margin, 21 + $ui_margin, $input_width, $input_height)
 _GUICtrlEdit_SetCueBanner($input_windowname, "Fenstername", True)
+; Inputbox for custom prefix
 Global $input_prefix = GUICtrlCreateInput("", $ui_margin, 21 + 2 * $ui_margin + $input_height, $input_width, $input_height)
 _GUICtrlEdit_SetCueBanner($input_prefix, "Präfix ohne Leerzeichen", True)
+; Combo for selecting language
+Global $combo_language = GUICtrlCreateCombo("Deutsch", $ui_margin, 21 + 3 * $ui_margin + 2 * $input_height, $input_width, $input_height)
+GUICtrlSetData($combo_language, "English")
 
 Load_Config()
 GUISetState(@SW_SHOW)
@@ -126,17 +130,19 @@ Func Read_Inputs() ; Save Inputfields
 EndFunc   ;==>Read_Inputs
 
 Func Save_Config() ; Saves Settings to INI File
-	IniWrite($iniconfig, "settings", "windowname", $windowname)
-	IniWrite($iniconfig, "settings", "prefix", $prefix)
+	IniWrite($iniconfig, "settings", "windowname", GUICtrlRead($input_windowname))
+	IniWrite($iniconfig, "settings", "prefix", GUICtrlRead($input_index))
 	IniWrite($iniconfig, "settings", "keepdate", GUICtrlRead($checkbox_keepdate))
 	IniWrite($iniconfig, "settings", "keepindex", GUICtrlRead($checkbox_keepindex))
+	IniWrite($iniconfig, "settings", "language", GUICtrlRead($combo_language))
 EndFunc   ;==>Save_Config
 
 Func Load_Config() ; Load Settings from INI File
-	GUICtrlSetData($input_windowname, IniRead($iniconfig, "settings", "windowname", "")) ; Save Windowname
+	GUICtrlSetData($input_windowname, IniRead($iniconfig, "settings", "windowname", "Word")) ; Save Windowname
 	GUICtrlSetData($input_prefix, IniRead($iniconfig, "settings", "prefix", ""))
 	GUICtrlSetState($checkbox_keepdate, IniRead($iniconfig, "settings", "keepdate", "")) ; Save if the Date should be keept when pressing clear
-	GUICtrlSetState($checkbox_keepindex, IniRead($iniconfig, "settings", "keepindex", "")) ; Save if the Index should be keept when pressing clear
+	GUICtrlSetState($checkbox_keepindex, IniRead($iniconfig, "settings", "keepindex", ""))
+	GUICtrlSetState($combo_language, IniRead($iniconfig, "settings", "language", "Deutsch")) ; Load selected Language
 EndFunc   ;==>Load_Config
 
 Func Input_Data() ; Inputs correctly formated Data
