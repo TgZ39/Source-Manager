@@ -24,7 +24,6 @@ Global Const $button_width = 70, $button_height = 20
 Global Const $input_width = 200, $input_height = 20
 Global Const $configfolder = @AppDataDir
 Global Const $iniconfig = $configfolder & "\QM_Config.ini"
-;~ Global Const $inisources = $configfolder & "\QM_Sources.ini"
 Global $i = 0
 
 ; =============================================================Config=============================================================
@@ -124,7 +123,7 @@ While True
 	EndSwitch
 WEnd
 
-Func Read_Inputs() ; Save Inputfields
+Func Read_Inputs() ; Read Inputfields
 	Global $title = GUICtrlRead($input_title)
 	Global $url = GUICtrlRead($input_url)
 	Global $url_modified = Modify_Url($url)
@@ -139,18 +138,18 @@ Func Read_Inputs() ; Save Inputfields
 EndFunc   ;==>Read_Inputs
 
 Func Save_Config() ; Saves Settings to INI File
-	IniWrite($iniconfig, "settings", "windowname", GUICtrlRead($input_windowname))
-	IniWrite($iniconfig, "settings", "prefix", GUICtrlRead($input_prefix))
-	IniWrite($iniconfig, "settings", "keepdate", GUICtrlRead($checkbox_keepdate))
-	IniWrite($iniconfig, "settings", "keepindex", GUICtrlRead($checkbox_keepindex))
-	IniWrite($iniconfig, "settings", "language", GUICtrlRead($combo_language))
+	IniWrite($iniconfig, "settings", "windowname", GUICtrlRead($input_windowname)) ; Save Windowname
+	IniWrite($iniconfig, "settings", "prefix", GUICtrlRead($input_prefix)) ; Save custom prefix
+	IniWrite($iniconfig, "settings", "keepdate", GUICtrlRead($checkbox_keepdate)) ; Save if Date should be keept when pressing clear
+	IniWrite($iniconfig, "settings", "keepindex", GUICtrlRead($checkbox_keepindex)) ; Save if Index should be keept when pressing clear
+	IniWrite($iniconfig, "settings", "language", GUICtrlRead($combo_language)) ; Save selected Language
 EndFunc   ;==>Save_Config
 
 Func Load_Config() ; Load Settings from INI File
-	GUICtrlSetData($input_windowname, IniRead($iniconfig, "settings", "windowname", "Word")) ; Save Windowname
-	GUICtrlSetData($input_prefix, IniRead($iniconfig, "settings", "prefix", ""))
-	GUICtrlSetState($checkbox_keepdate, IniRead($iniconfig, "settings", "keepdate", "")) ; Save if the Date should be keept when pressing clear
-	GUICtrlSetState($checkbox_keepindex, IniRead($iniconfig, "settings", "keepindex", ""))
+	GUICtrlSetData($input_windowname, IniRead($iniconfig, "settings", "windowname", "Word")) ; Load Windowname
+	GUICtrlSetData($input_prefix, IniRead($iniconfig, "settings", "prefix", "")) ; Load Custom prefix
+	GUICtrlSetState($checkbox_keepdate, IniRead($iniconfig, "settings", "keepdate", "")) ; Load if the Date should be keept when pressing clear
+	GUICtrlSetState($checkbox_keepindex, IniRead($iniconfig, "settings", "keepindex", "")) ; Load if the Index should be keept when pressing clear
 	GUICtrlSetData($combo_language, IniRead($iniconfig, "settings", "language", "Deutsch")) ; Load selected Language
 EndFunc   ;==>Load_Config
 
@@ -181,7 +180,7 @@ EndFunc   ;==>Modify_Url
 
 Func Load_Language()
 	Switch IniRead($iniconfig, "settings", "language", "Deutsch")
-		Case "English"
+		Case "English" ; Set Language Text for English
 			Global $language_title = "Source Manger"
 			Global $language_input_title = "Title"
 			Global $language_input_name = "Name"
@@ -201,7 +200,7 @@ Func Load_Language()
 			Global $language_button_save = "Save"
 			Global $language_msgbox_windowdoesntexsist = " does not exsist."
 			Global $language_output_dateofrequest = " [Date of Request: "
-		Case Else
+		Case Else ; Set Language Text for Default (German)
 			Global $language_title = "Quellen Manager"
 			Global $language_input_title = "Titel"
 			Global $language_input_name = "Vorname"
