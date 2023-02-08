@@ -68,6 +68,7 @@ Global $button_ok = GUICtrlCreateButton("OK", $ui_margin, $ui_height - $button_h
 Global $button_clear = GUICtrlCreateButton($language_button_clear, 2 * $ui_margin + $button_width, $ui_height - $button_height - $ui_margin, $button_width, $button_height)
 ; Checkbox do determain if date inputfield should be cleared when clear button is pressed
 Global $checkbox_keepdate = GUICtrlCreateCheckbox($language_checkbox_keepdate, 3 * $ui_margin + $input_width + $button_width + 20, 21 + 6 * $ui_margin + 5 * $input_height)
+; Checkbox do determain if index inputfield should be cleared when clear button is pressed
 Global $checkbox_keepindex = GUICtrlCreateCheckbox($language_checkbox_keepindex, 3 * $ui_margin + $input_width, 21 + 7 * $ui_margin + 6 * $input_height)
 ; Button to fill in current date
 Global $button_currentdate = GUICtrlCreateButton($language_button_currentdate, 2 * $ui_margin + $input_width, 21 + 6 * $ui_margin + 5 * $input_height, $button_width + 20, $button_height)
@@ -86,6 +87,7 @@ _GUICtrlEdit_SetCueBanner($input_prefix, $language_input_customprefix, True)
 ; Combo for selecting language
 Global $combo_language = GUICtrlCreateCombo("Deutsch", $ui_margin, 21 + 3 * $ui_margin + 2 * $input_height, $input_width, $input_height)
 GUICtrlSetData($combo_language, "English")
+GUICtrlCreateLabel("Restart required.", 2 * $ui_margin + $input_width, 21 + 3 * $ui_margin + 2 * $input_height + 4)
 
 Load_Config()
 GUISetState(@SW_SHOW)
@@ -133,7 +135,7 @@ EndFunc   ;==>Read_Inputs
 
 Func Save_Config() ; Saves Settings to INI File
 	IniWrite($iniconfig, "settings", "windowname", GUICtrlRead($input_windowname))
-	IniWrite($iniconfig, "settings", "prefix", GUICtrlRead($input_index))
+	IniWrite($iniconfig, "settings", "prefix", GUICtrlRead($input_prefix))
 	IniWrite($iniconfig, "settings", "keepdate", GUICtrlRead($checkbox_keepdate))
 	IniWrite($iniconfig, "settings", "keepindex", GUICtrlRead($checkbox_keepindex))
 	IniWrite($iniconfig, "settings", "language", GUICtrlRead($combo_language))
