@@ -24,62 +24,74 @@ Global Const $button_width = 70, $button_height = 20
 Global Const $input_width = 200, $input_height = 20
 Global Const $configfolder = @AppDataDir
 Global Const $iniconfig = $configfolder & "\QM_Config.ini"
-Global Const $inisources = $configfolder & "\QM_Sources.ini"
 Global $i = 0
+
+; =============================================================Config=============================================================
+
+; Initialize Language Text
+Global $language_title = "", $language_input_title = "", $language_input_name = "", $language_input_lastname = "", $language_input_year = "", $language_input_date = "", $language_input_index = "", $language_button_currentdate = "", $language_checkbox_keepdate = "", $language_checkbox_keepindex = "", $language_button_clear = "", $language_button_cancel = "", $language_tab_paste = "", $language_tab_settings = "", $language_input_windowname = "", $language_input_customprefix = "", $language_button_save = "", $language_msgbox_windowdoesntexsist = ""
+; Set Language Text
+Load_Language()
 
 ; =============================================================GUI=============================================================
 
-Global $hGui = GUICreate("Quellen Manager", $ui_width, $ui_height) ; Create Gui
+Global $hGui = GUICreate($language_title, $ui_width, $ui_height) ; Create Gui
 Global $tab = GUICtrlCreateTab(0, 0, $ui_width, $ui_height) ; Create Tab Group
-Global $button_cancel = GUICtrlCreateButton("Abbrechen", $ui_width - $button_width - $ui_margin, $ui_height - $button_height - $ui_margin, $button_width, $button_height) ; Cancel Button
+Global $button_cancel = GUICtrlCreateButton($language_button_cancel, $ui_width - $button_width - $ui_margin, $ui_height - $button_height - $ui_margin, $button_width, $button_height) ; Cancel Button
 
 ; =============================================================Paste Tab=============================================================
 
 ; Paste Tab
-Global $tab_paste = GUICtrlCreateTabItem("Einfügen")
+Global $tab_paste = GUICtrlCreateTabItem($language_tab_paste)
 ; Input Title
 Global $input_title = GUICtrlCreateInput("", $ui_margin, 21 + $ui_margin, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_title, "Titel", True)
+_GUICtrlEdit_SetCueBanner($input_title, $language_input_title, True)
 ; Input URL
 Global $input_url = GUICtrlCreateInput("", $ui_margin, 21 + 2 * $ui_margin + 1 * $input_height, $input_width, $input_height)
 _GUICtrlEdit_SetCueBanner($input_url, "URL", True)
 ; Input Name
 Global $input_name = GUICtrlCreateInput("", $ui_margin, 21 + 3 * $ui_margin + 2 * $input_height, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_name, "Vorname", True)
+_GUICtrlEdit_SetCueBanner($input_name, $language_input_name, True)
 ; Input Last Name
 Global $input_lastname = GUICtrlCreateInput("", $ui_margin, 21 + 4 * $ui_margin + 3 * $input_height, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_lastname, "Nachname", True)
+_GUICtrlEdit_SetCueBanner($input_lastname, $language_input_lastname, True)
 ; Input Year
 Global $input_year = GUICtrlCreateInput("", $ui_margin, 21 + 5 * $ui_margin + 4 * $input_height, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_year, "Jahr", True)
+_GUICtrlEdit_SetCueBanner($input_year, $language_input_year, True)
 ; Input Date
 Global $input_date = GUICtrlCreateInput("", $ui_margin, 21 + 6 * $ui_margin + 5 * $input_height, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_date, "Datum", True)
+_GUICtrlEdit_SetCueBanner($input_date, $language_input_date, True)
 ; Input Index
 Global $input_index = GUICtrlCreateInput("", $ui_margin, 21 + 7 * $ui_margin + 6 * $input_height, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_index, "Index (leer lassen für Prefix)", True)
+_GUICtrlEdit_SetCueBanner($input_index, $language_input_index, True)
 GUICtrlCreateUpdown($input_index)
 ; Buttons
 ; Ok button
 Global $button_ok = GUICtrlCreateButton("OK", $ui_margin, $ui_height - $button_height - $ui_margin, $button_width, $button_height)
 ; Clear inputfields button
-Global $button_clear = GUICtrlCreateButton("Löschen", 2 * $ui_margin + $button_width, $ui_height - $button_height - $ui_margin, $button_width, $button_height)
+Global $button_clear = GUICtrlCreateButton($language_button_clear, 2 * $ui_margin + $button_width, $ui_height - $button_height - $ui_margin, $button_width, $button_height)
 ; Checkbox do determain if date inputfield should be cleared when clear button is pressed
-Global $checkbox_keepdate = GUICtrlCreateCheckbox("Datum beibehalten?", 3 * $ui_margin + $input_width + $button_width + 20, 21 + 6 * $ui_margin + 5 * $input_height)
-Global $checkbox_keepindex = GUICtrlCreateCheckbox("Index beibehalten?", 3 * $ui_margin + $input_width, 21 + 7 * $ui_margin + 6 * $input_height)
+Global $checkbox_keepdate = GUICtrlCreateCheckbox($language_checkbox_keepdate, 3 * $ui_margin + $input_width + $button_width + 20, 21 + 6 * $ui_margin + 5 * $input_height)
+; Checkbox do determain if index inputfield should be cleared when clear button is pressed
+Global $checkbox_keepindex = GUICtrlCreateCheckbox($language_checkbox_keepindex, 3 * $ui_margin + $input_width, 21 + 7 * $ui_margin + 6 * $input_height)
 ; Button to fill in current date
-Global $button_currentdate = GUICtrlCreateButton("Aktuelles Datum", 2 * $ui_margin + $input_width, 21 + 6 * $ui_margin + 5 * $input_height, $button_width + 20, $button_height)
+Global $button_currentdate = GUICtrlCreateButton($language_button_currentdate, 2 * $ui_margin + $input_width, 21 + 6 * $ui_margin + 5 * $input_height, $button_width + 20, $button_height)
 
 
 ; =============================================================Settings Tab=============================================================
 ; Tab Settings
-Global $tab_settings = GUICtrlCreateTabItem("Einstellungen")
-Global $button_save = GUICtrlCreateButton("Speichern", $ui_margin, $ui_height - $button_height - $ui_margin, $button_width, $button_height) ; Save Button
+Global $tab_settings = GUICtrlCreateTabItem($language_tab_settings)
+Global $button_save = GUICtrlCreateButton($language_button_save, $ui_margin, $ui_height - $button_height - $ui_margin, $button_width, $button_height) ; Save Button
 ; Input Window to Activate
 Global $input_windowname = GUICtrlCreateInput("", $ui_margin, 21 + $ui_margin, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_windowname, "Fenstername", True)
+_GUICtrlEdit_SetCueBanner($input_windowname, $language_input_windowname, True)
+; Inputbox for custom prefix
 Global $input_prefix = GUICtrlCreateInput("", $ui_margin, 21 + 2 * $ui_margin + $input_height, $input_width, $input_height)
-_GUICtrlEdit_SetCueBanner($input_prefix, "Präfix ohne Leerzeichen", True)
+_GUICtrlEdit_SetCueBanner($input_prefix, $language_input_customprefix, True)
+; Combo for selecting language
+Global $combo_language = GUICtrlCreateCombo("Deutsch", $ui_margin, 21 + 3 * $ui_margin + 2 * $input_height, $input_width, $input_height)
+GUICtrlSetData($combo_language, "English")
+GUICtrlCreateLabel("Restart required.", 2 * $ui_margin + $input_width, 21 + 3 * $ui_margin + 2 * $input_height + 4)
 
 Load_Config()
 GUISetState(@SW_SHOW)
@@ -111,7 +123,7 @@ While True
 	EndSwitch
 WEnd
 
-Func Read_Inputs() ; Save Inputfields
+Func Read_Inputs() ; Read Inputfields
 	Global $title = GUICtrlRead($input_title)
 	Global $url = GUICtrlRead($input_url)
 	Global $url_modified = Modify_Url($url)
@@ -126,17 +138,19 @@ Func Read_Inputs() ; Save Inputfields
 EndFunc   ;==>Read_Inputs
 
 Func Save_Config() ; Saves Settings to INI File
-	IniWrite($iniconfig, "settings", "windowname", $windowname)
-	IniWrite($iniconfig, "settings", "prefix", $prefix)
-	IniWrite($iniconfig, "settings", "keepdate", GUICtrlRead($checkbox_keepdate))
-	IniWrite($iniconfig, "settings", "keepindex", GUICtrlRead($checkbox_keepindex))
+	IniWrite($iniconfig, "settings", "windowname", GUICtrlRead($input_windowname)) ; Save Windowname
+	IniWrite($iniconfig, "settings", "prefix", GUICtrlRead($input_prefix)) ; Save custom prefix
+	IniWrite($iniconfig, "settings", "keepdate", GUICtrlRead($checkbox_keepdate)) ; Save if Date should be keept when pressing clear
+	IniWrite($iniconfig, "settings", "keepindex", GUICtrlRead($checkbox_keepindex)) ; Save if Index should be keept when pressing clear
+	IniWrite($iniconfig, "settings", "language", GUICtrlRead($combo_language)) ; Save selected Language
 EndFunc   ;==>Save_Config
 
 Func Load_Config() ; Load Settings from INI File
-	GUICtrlSetData($input_windowname, IniRead($iniconfig, "settings", "windowname", "")) ; Save Windowname
-	GUICtrlSetData($input_prefix, IniRead($iniconfig, "settings", "prefix", ""))
-	GUICtrlSetState($checkbox_keepdate, IniRead($iniconfig, "settings", "keepdate", "")) ; Save if the Date should be keept when pressing clear
-	GUICtrlSetState($checkbox_keepindex, IniRead($iniconfig, "settings", "keepindex", "")) ; Save if the Index should be keept when pressing clear
+	GUICtrlSetData($input_windowname, IniRead($iniconfig, "settings", "windowname", "Word")) ; Load Windowname
+	GUICtrlSetData($input_prefix, IniRead($iniconfig, "settings", "prefix", "")) ; Load Custom prefix
+	GUICtrlSetState($checkbox_keepdate, IniRead($iniconfig, "settings", "keepdate", "")) ; Load if the Date should be keept when pressing clear
+	GUICtrlSetState($checkbox_keepindex, IniRead($iniconfig, "settings", "keepindex", "")) ; Load if the Index should be keept when pressing clear
+	GUICtrlSetData($combo_language, IniRead($iniconfig, "settings", "language", "Deutsch")) ; Load selected Language
 EndFunc   ;==>Load_Config
 
 Func Input_Data() ; Inputs correctly formated Data
@@ -153,9 +167,9 @@ Func Input_Data() ; Inputs correctly formated Data
 		If $year <> "" Then Send(" (" & $year & "): ")
 		If $year = "" Then Send(": ")
 
-		Send($title & ". URL: " & $url_modified & " [Stand: " & $date & "].{Enter}")
+		Send($title & ". URL: " & $url_modified & $language_output_dateofrequest & $date & "].{Enter}")
 	Else
-		MsgBox($MB_SYSTEMMODAL, "Quellen Manager", $windowname & " exsistiert nicht.")
+		MsgBox($MB_SYSTEMMODAL, $language_input_windowname, $windowname & $language_msgbox_windowdoesntexsist)
 	EndIf
 EndFunc   ;==>Input_Data
 
@@ -163,3 +177,48 @@ Func Modify_Url($url) ; Modifies the $url so "#" can be Send()
 	Local $url2 = StringReplace($url, "#", "{#}")
 	Return $url2
 EndFunc   ;==>Modify_Url
+
+Func Load_Language()
+	Switch IniRead($iniconfig, "settings", "language", "Deutsch")
+		Case "English" ; Set Language Text for English
+			Global $language_title = "Source Manger"
+			Global $language_input_title = "Title"
+			Global $language_input_name = "Name"
+			Global $language_input_lastname = "Lastname"
+			Global $language_input_year = "Year"
+			Global $language_input_date = "Date"
+			Global $language_input_index = "Index (leave empty for prefix)"
+			Global $language_button_currentdate = "Current Date"
+			Global $language_checkbox_keepdate = "Keep current Date?"
+			Global $language_checkbox_keepindex = "Keep Index?"
+			Global $language_button_clear = "Clear"
+			Global $language_button_cancel = "Cancel"
+			Global $language_tab_paste = "Paste"
+			Global $language_tab_settings = "Settings"
+			Global $language_input_windowname = "Windowname"
+			Global $language_input_customprefix = "Prefix"
+			Global $language_button_save = "Save"
+			Global $language_msgbox_windowdoesntexsist = " does not exsist."
+			Global $language_output_dateofrequest = " [Date of Request: "
+		Case Else ; Set Language Text for Default (German)
+			Global $language_title = "Quellen Manager"
+			Global $language_input_title = "Titel"
+			Global $language_input_name = "Vorname"
+			Global $language_input_lastname = "Nachname"
+			Global $language_input_year = "Jahr"
+			Global $language_input_date = "Datum"
+			Global $language_input_index = "Index (leer lassen für Präfix)"
+			Global $language_button_currentdate = "Aktuelles Datum"
+			Global $language_checkbox_keepdate = "Datum beibehalten?"
+			Global $language_checkbox_keepindex = "Index beibehalten?"
+			Global $language_button_clear = "Löschen"
+			Global $language_button_cancel = "Abbrechen"
+			Global $language_tab_paste = "Einfügen"
+			Global $language_tab_settings = "Einstellungen"
+			Global $language_input_windowname = "Fenstername"
+			Global $language_input_customprefix = "Präfix"
+			Global $language_button_save = "Speichern"
+			Global $language_msgbox_windowdoesntexsist = " exsistiert nicht."
+			Global $language_output_dateofrequest = " [Stand: "
+	EndSwitch
+EndFunc
