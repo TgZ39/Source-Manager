@@ -27,9 +27,14 @@ Global Const $iniconfig = $configfolder & "\QM_Config.ini"
 ;~ Global Const $inisources = $configfolder & "\QM_Sources.ini"
 Global $i = 0
 
-; =============================================================GUI=============================================================
+; =============================================================Config=============================================================
 
+; Initialize Language Text
+Global $language_title = "", $language_input_title = "", $language_input_name = "", $language_input_lastname = "", $language_input_year = "", $language_input_date = "", $language_input_index = "", $language_button_currentdate = "", $language_checkbox_keepdate = "", $language_checkbox_keepindex = "", $language_button_clear = "", $language_button_cancel = "", $language_tab_paste = "", $language_tab_settings = "", $language_input_windowname = "", $language_input_customprefix = "", $language_button_save = "", $language_msgbox_windowdoesntexsist = ""
+; Set Language Text
 Load_Language()
+
+; =============================================================GUI=============================================================
 
 Global $hGui = GUICreate($language_title, $ui_width, $ui_height) ; Create Gui
 Global $tab = GUICtrlCreateTab(0, 0, $ui_width, $ui_height) ; Create Tab Group
