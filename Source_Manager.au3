@@ -221,4 +221,4 @@ Func Load_Language()
 			Global $language_msgbox_windowdoesntexsist = " exsistiert nicht."
 			Global $language_output_dateofrequest = " [Stand: "
 	EndSwitch
-EndFunc
+EndFunc   ;==>Load_Language
