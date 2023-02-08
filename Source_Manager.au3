@@ -24,7 +24,7 @@ Global Const $button_width = 70, $button_height = 20
 Global Const $input_width = 200, $input_height = 20
 Global Const $configfolder = @AppDataDir
 Global Const $iniconfig = $configfolder & "\QM_Config.ini"
-Global Const $inisources = $configfolder & "\QM_Sources.ini"
+;~ Global Const $inisources = $configfolder & "\QM_Sources.ini"
 Global $i = 0
 
 ; =============================================================GUI=============================================================
