@@ -29,6 +29,8 @@ Global $i = 0
 
 ; =============================================================GUI=============================================================
 
+Load_Language()
+
 Global $hGui = GUICreate("Quellen Manager", $ui_width, $ui_height) ; Create Gui
 Global $tab = GUICtrlCreateTab(0, 0, $ui_width, $ui_height) ; Create Tab Group
 Global $button_cancel = GUICtrlCreateButton("Abbrechen", $ui_width - $button_width - $ui_margin, $ui_height - $button_height - $ui_margin, $button_width, $button_height) ; Cancel Button
@@ -142,7 +144,7 @@ Func Load_Config() ; Load Settings from INI File
 	GUICtrlSetData($input_prefix, IniRead($iniconfig, "settings", "prefix", ""))
 	GUICtrlSetState($checkbox_keepdate, IniRead($iniconfig, "settings", "keepdate", "")) ; Save if the Date should be keept when pressing clear
 	GUICtrlSetState($checkbox_keepindex, IniRead($iniconfig, "settings", "keepindex", ""))
-	GUICtrlSetState($combo_language, IniRead($iniconfig, "settings", "language", "Deutsch")) ; Load selected Language
+	;~ GUICtrlSetData($combo_language, IniRead($iniconfig, "settings", "language", "Deutsch")) ; Load selected Language
 EndFunc   ;==>Load_Config
 
 Func Input_Data() ; Inputs correctly formated Data
@@ -169,3 +171,44 @@ Func Modify_Url($url) ; Modifies the $url so "#" can be Send()
 	Local $url2 = StringReplace($url, "#", "{#}")
 	Return $url2
 EndFunc   ;==>Modify_Url
+
+Func Load_Language()
+	Switch IniRead($iniconfig, "settings", "language", "Deutsch")
+		Case "English"
+			Global $language_title = "Source Manger"
+			Global $language_input_title = "Title"
+			Global $language_input_name = "Name"
+			Global $language_input_lastname = "Lastname"
+			Global $language_input_year = "Year"
+			Global $language_input_date = "Date"
+			Global $language_input_index = "Index (keep empty for prefix)"
+			Global $language_button_currentdate = "Current Date"
+			Global $language_checkbox_keepdate = "Keep current Date?"
+			Global $language_checkbox_keepindex = "Keep Index?"
+			Global $language_button_clear = "Clear"
+			Global $language_button_cancel = "Cancel"
+			Global $language_tab_paste = "Pase"
+			Global $language_tab_settings = "Settings"
+			Global $language_input_windowname = "Windowname"
+			Global $language_input_customprefix = "Prefix"
+			Global $language_button_save = "Save"
+		Case Else
+			Global $language_title = "Quellen Manager"
+			Global $language_input_title = "Titel"
+			Global $language_input_name = "Vorname"
+			Global $language_input_lastname = "Nachname"
+			Global $language_input_year = "Jahr"
+			Global $language_input_date = "Datum"
+			Global $language_input_index = "Index (leer lassen für Präfix)"
+			Global $language_button_currentdate = "Aktuelles Datum"
+			Global $language_checkbox_keepdate = "Datum beibehalten?"
+			Global $language_checkbox_keepindex = "Index beibehalten?"
+			Global $language_button_clear = "Löschen"
+			Global $language_button_cancel = "Abbrechen"
+			Global $language_tab_paste = "Einfügen"
+			Global $language_tab_settings = "Einstellungen"
+			Global $language_input_windowname = "Fenstername"
+			Global $language_input_customprefix = "Präfix"
+			Global $language_button_save = "Speichern"
+	EndSwitch
+EndFunc
