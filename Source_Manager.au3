@@ -168,7 +168,7 @@ Func Input_Data() ; Inputs correctly formated Data
 		If $year <> "" Then Send(" (" & $year & "): ")
 		If $year = "" Then Send(": ")
 
-		Send($title & ". URL: " & $url_modified & " [Stand: " & $date & "].{Enter}")
+		Send($title & ". URL: " & $url_modified & $language_output_dateofrequest & $date & "].{Enter}")
 	Else
 		MsgBox($MB_SYSTEMMODAL, $language_input_windowname, $windowname & $language_msgbox_windowdoesntexsist)
 	EndIf
@@ -200,6 +200,7 @@ Func Load_Language()
 			Global $language_input_customprefix = "Prefix"
 			Global $language_button_save = "Save"
 			Global $language_msgbox_windowdoesntexsist = " does not exsist."
+			Global $language_output_dateofrequest = " [Date of Request: "
 		Case Else
 			Global $language_title = "Quellen Manager"
 			Global $language_input_title = "Titel"
@@ -219,5 +220,6 @@ Func Load_Language()
 			Global $language_input_customprefix = "Präfix"
 			Global $language_button_save = "Speichern"
 			Global $language_msgbox_windowdoesntexsist = " exsistiert nicht."
+			Global $language_output_dateofrequest = " [Stand: "
 	EndSwitch
 EndFunc
