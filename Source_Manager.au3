@@ -14,6 +14,7 @@
 #include <MsgBoxConstants.au3>
 #include <GuiListView.au3>
 #include <UpDownConstants.au3>
+#include <Clipboard.au3>
 
 Opt("WinTitleMatchMode", 2)
 
@@ -154,20 +155,25 @@ Func Load_Config() ; Load Settings from INI File
 EndFunc   ;==>Load_Config
 
 Func Input_Data() ; Inputs correctly formated Data
+	Local $text = ""
 	If WinExists($windowname) Then
 		WinActivate($windowname)
 
-		If $index <> "" Then Send("[" & $index & "] ")
-		If $index = "" Then Send($prefix & " ")
+		If $index <> "" Then $text &= "[" & $index & "] "
+		If $index = "" Then $text &= $prefix & " "
 
-		If $lastname <> "" Then Send($lastname & ", ")
+		If $lastname <> "" Then $text &= $lastname & ", "
 
-		Send($name)
+		$text &= $name
 
-		If $year <> "" Then Send(" (" & $year & "): ")
-		If $year = "" Then Send(": ")
+		If $year <> "" Then $text &= " (" & $year & "): "
+		If $year = "" Then $text &= ": "
 
-		Send($title & ". URL: " & $url_modified & $language_output_dateofrequest & $date & "].{Enter}")
+		$text &= $title & ". URL: " & $url_modified & $language_output_dateofrequest & $date & "]."
+
+		_ClipBoard_SetData($text, $CF_UNICODETEXT)
+
+		Send("^v")
 	Else
 		MsgBox($MB_SYSTEMMODAL, $language_input_windowname, $windowname & $language_msgbox_windowdoesntexsist)
 	EndIf
