@@ -30,7 +30,7 @@ Global $i = 0
 ; =============================================================Config=============================================================
 
 ; Initialize Language Text
-Global $language_title = "", $language_input_title = "", $language_input_name = "", $language_input_lastname = "", $language_input_year = "", $language_input_date = "", $language_input_index = "", $language_button_currentdate = "", $language_checkbox_keepdate = "", $language_checkbox_keepindex = "", $language_button_clear = "", $language_button_cancel = "", $language_tab_paste = "", $language_tab_settings = "", $language_input_windowname = "", $language_input_customprefix = "", $language_button_save = "", $language_msgbox_windowdoesntexsist = ""
+Global $language_title = "", $language_input_title = "", $language_input_name = "", $language_input_lastname = "", $language_input_year = "", $language_input_date = "", $language_input_index = "", $language_button_currentdate = "", $language_checkbox_keepdate = "", $language_checkbox_keepindex = "", $language_button_clear = "", $language_button_cancel = "", $language_tab_paste = "", $language_tab_settings = "", $language_input_windowname = "", $language_input_customprefix = "", $language_button_save = "", $language_msgbox_windowdoesntexsist = "", $language_output_dateofrequest = ""
 ; Set Language Text
 Load_Language()
 
